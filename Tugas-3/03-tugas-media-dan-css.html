@@ -7,8 +7,8 @@
 </head>
 <body>
     <main class="page-content">
-        <article class="card featured">
-        <figure class="card-media">
+        <article class="showcase-card showcase-card--featured">
+        <figure class="showcase-card__media">
             <picture>
                 <source
                     srcset="media/Cover-desktop.webp"
@@ -21,29 +21,29 @@
                     type="image/webp"
                 />
                 <img
-                    class="card-image"
+                    class="showcase-card__image"
                     src="media/Poster.jpg"
                     alt="Banner platform e-learning untuk mata kuliah pemrograman website"
                 />
             </picture>
 
-            <figcaption class="caption">
+            <figcaption class="showcase-card__caption">
                 Gambar responsif menggunakan elemen picture dengan dua sumber WebP dan satu fallback JPEG dari file lokal.
             </figcaption>
 
             </figure>
-                <div class="card-body">
-                    <span class="tag">Multimedia Interaktif</span>
-                    <h1 class="title">Kartu E-Learning Pemrograman Website</h1>
-                    <p class="description">
+                <div class="showcase-card__body">
+                    <span class="showcase-card__tag">Multimedia Interaktif</span>
+                    <h1 class="showcase-card__title">Kartu E-Learning Pemrograman Website</h1>
+                    <p class="showcase-card__description">
                         Komponen ini menampilkan integrasi media digital native HTML5. Pada kartu ini, status featured
                         menimpa gaya default deskripsi sebagai bukti spesifisitas selector CSS.
                     </p>
 
-                    <section class="section">
-                        <h2 class="section-title">Video Pembelajaran</h2>
+                    <section class="showcase-card__section">
+                        <h2 class="showcase-card__section-title">Video Pembelajaran</h2>
                         <video
-                            class="video-player"
+                            class="showcase-card__video-player"
                             controls
                             preload="metadata"
                             poster="media/poster.jpg"
@@ -52,17 +52,17 @@
                         <source src="media/video.mp4" type="video/mp4" />
                         Browser Anda tidak mendukung pemutaran video HTML5.
                         </video>
-                        <p class="meta">Format cadangan video: WebM dan MP4 dari file lokal.</p>
+                        <p class="showcase-card__meta">Format cadangan video: WebM dan MP4 dari file lokal.</p>
                     </section>
 
-                    <section class="section">
-                        <h2 class="section-title">Audio Penjelasan Singkat</h2>
-                        <audio class="audio-player" controls preload="metadata">
+                    <section class="showcase-card__section">
+                        <h2 class="showcase-card__section-title">Audio Penjelasan Singkat</h2>
+                        <audio class="showcase-card__audio-player" controls preload="metadata">
                             <source src="media/Audio.ogg" type="audio/ogg" />
                             <source src="media/Audio.mp3" type="audio/mpeg" />
                             Browser Anda tidak mendukung pemutaran audio HTML5.
                         </audio>
-                        <p class="meta">Format cadangan audio: OGG dan MP3 dari file lokal.</p>
+                        <p class="showcase-card__meta">Format cadangan audio: OGG dan MP3 dari file lokal.</p>
                         </section>
                 </div>
         </article>
