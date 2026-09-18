@@ -204,3 +204,44 @@ body {
   font-size: 30px;
   color: #0d6efd;
 }
+
+/* TABLET */
+
+@media (max-width: 991px) {
+  .layout-container {
+    grid-template-columns: 200px 1fr;
+  }
+
+  .sidebar-right {
+    display: none;
+  }
+}
+
+/* MOBILE */
+
+@media (max-width: 767px) {
+  .header {
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .navbar-menu {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero {
+    margin: 20px;
+    padding: 30px;
+  }
+
+  .hero h1 {
+    font-size: 28px;
+  }
+
+  .layout-container {
+    grid-template-columns: 1fr;
+    padding: 20px;
+  }
+}
