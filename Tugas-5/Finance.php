@@ -6,6 +6,14 @@ require_once "Transaction.php";
 
 session_start();
 
+if(empty($_SESSION['csrf_token'])){
+
+    $_SESSION['csrf_token']
+    =
+    bin2hex(random_bytes(32));
+
+}
+
 
 $message = "";
 
@@ -15,7 +23,17 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
 
     $type = $_POST['type'];
 
-    $amount = (float)$_POST['amount'];
+    $amount = $_POST['amount'];
+
+
+    if(!is_numeric($amount) || $amount <= 0){
+
+    die("Jumlah transaksi tidak valid");
+
+}
+
+
+$amount = (float)$amount;
 
 
     $transaction = new Transaction(
@@ -33,6 +51,15 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
     else{
 
         $message = "Saldo tidak cukup";
+
+    }
+
+    if(!hash_equals(
+        $_SESSION['csrf_token'],
+        $_POST['csrf_token']
+    )){
+
+    die("CSRF Token Salah");
 
     }
 
@@ -62,7 +89,7 @@ Sistem Manajemen Keuangan
 
 
 <p>
-<?= $message ?>
+<?= htmlspecialchars($message) ?>
 </p>
 
 
@@ -86,10 +113,10 @@ Withdraw
 <br><br>
 
 
-<input 
-type="number"
-name="amount"
-step="0.01"
+<input
+type="hidden"
+name="csrf_token"
+value="<?= htmlspecialchars($_SESSION['csrf_token']) ?>"
 >
 
 
