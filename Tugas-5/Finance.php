@@ -67,70 +67,53 @@ $amount = (float)$amount;
 
 ?>
 
-
 <!DOCTYPE html>
 <html>
 
-<head>
+    <head>
+        <title>
+            Finance System
+        </title>
+    </head>
 
-<title>
-Finance System
-</title>
+    <body>
 
-</head>
+    <h2>
+         Sistem Manajemen Keuangan
+    </h2>
 
+    <p>
+        <?= htmlspecialchars($message) ?>
+    </p>
 
-<body>
+    <form method="POST">
+    <select name="type">
+    <option value="deposit">
+        Deposit
+    </option>
 
+    <option value="withdraw">
+         Withdraw
+    </option>
 
-<h2>
-Sistem Manajemen Keuangan
-</h2>
+    </select>
 
+    <br><br>
 
-<p>
-<?= htmlspecialchars($message) ?>
-</p>
+    <input
+        type="hidden"
+        name="csrf_token"
+        value="<?= htmlspecialchars($_SESSION['csrf_token']) ?>"
+    >
 
+    <br><br>
 
-<form method="POST">
+    <button>
+        Submit
+    </button>
 
+    </form>
 
-<select name="type">
-
-<option value="deposit">
-Deposit
-</option>
-
-
-<option value="withdraw">
-Withdraw
-</option>
-
-</select>
-
-
-<br><br>
-
-
-<input
-type="hidden"
-name="csrf_token"
-value="<?= htmlspecialchars($_SESSION['csrf_token']) ?>"
->
-
-
-<br><br>
-
-
-<button>
-Submit
-</button>
-
-
-</form>
-
-
-</body>
+    </body>
 
 </html>

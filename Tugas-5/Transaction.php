@@ -40,7 +40,6 @@ class Transaction
 
             },
 
-
             "withdraw" => function(){
 
                 if($_SESSION['balance'] < $this->amount){
@@ -49,21 +48,17 @@ class Transaction
 
                 }
 
-
                 $_SESSION['balance'] -= $this->amount;
 
                 return true;
 
             },
 
-
             default => false
 
         };
 
-
         return $result();
-
     }
 
 }   
