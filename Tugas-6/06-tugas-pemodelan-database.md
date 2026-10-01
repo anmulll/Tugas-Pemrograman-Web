@@ -258,3 +258,18 @@ erDiagram
 
     BUKU ||--o{ TRANSAKSI_PEMINJAMAN : dipinjam
 ```
+
+# Kesimpulan
+
+Perancangan database E-Library Kampus telah dilakukan menggunakan model basis data relasional.
+
+Proses normalisasi dilakukan mulai dari UNF, 1NF, 2NF, hingga 3NF untuk mengurangi redundansi dan mencegah anomali data.
+
+Database akhir terdiri dari empat tabel utama yaitu:
+
+1. Mahasiswa
+2. Buku
+3. Penerbit
+4. Transaksi_Peminjaman
+
+Hubungan antar tabel dijaga menggunakan Primary Key dan Foreign Key sehingga integritas data tetap terjamin.
