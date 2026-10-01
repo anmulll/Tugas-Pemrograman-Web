@@ -72,3 +72,49 @@ Berdasarkan studi kasus, sistem harus mampu menyimpan:
 | tanggal_pinjam  | Tanggal pinjam   |
 | tanggal_kembali | Tanggal kembali  |
 | status          | Status transaksi |
+
+# 5. Simulasi Normalisasi Database
+
+## Unnormalized Form (UNF)
+
+| NIM   | Nama Mahasiswa | Buku                        | Penerbit          | Tanggal Pinjam | Tanggal Kembali |
+| ----- | -------------- | --------------------------- | ----------------- | -------------- | --------------- |
+| 22001 | Andi           | Basis Data, Pemrograman Web | Informatika Press | 01-01-2026     | 07-01-2026      |
+
+Permasalahan:
+
+- Data buku memiliki nilai lebih dari satu.
+- Terjadi pengulangan data.
+- Struktur belum memenuhi bentuk normal pertama.
+
+# First Normal Form (1NF)
+
+| NIM   | Nama Mahasiswa | ID Buku | Judul Buku      | ID Penerbit |
+| ----- | -------------- | ------- | --------------- | ----------- |
+| 22001 | Andi           | B001    | Basis Data      | P001        |
+| 22001 | Andi           | B002    | Pemrograman Web | P002        |
+
+Perbaikan:
+
+- Setiap atribut memiliki satu nilai.
+- Kelompok data berulang sudah dihilangkan.
+
+# Second Normal Form (2NF)
+
+## Mahasiswa
+
+| nim   | nama_mahasiswa |
+| ----- | -------------- |
+| 22001 | Andi           |
+
+## Buku
+
+| id_buku | judul_buku | id_penerbit |
+| ------- | ---------- | ----------- |
+| B001    | Basis Data | P001        |
+
+## Transaksi
+
+| id_transaksi | nim   | id_buku |
+| ------------ | ----- | ------- |
+| T001         | 22001 | B001    |
