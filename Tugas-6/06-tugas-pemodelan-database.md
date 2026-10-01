@@ -212,3 +212,49 @@ Atribut:
 | tanggal_pinjam  | DATE        |     |
 | tanggal_kembali | DATE        |     |
 | status          | VARCHAR(20) |     |
+
+# Diagram Relasi Database
+
+```mermaid
+erDiagram
+
+    MAHASISWA {
+        varchar nim PK
+        varchar nama_mahasiswa
+        varchar program_studi
+        text alamat
+        varchar no_telepon
+    }
+
+    PENERBIT {
+        int id_penerbit PK
+        varchar nama_penerbit
+        text alamat_penerbit
+        varchar no_telepon
+    }
+
+    BUKU {
+        int id_buku PK
+        varchar judul_buku
+        year tahun_terbit
+        varchar kategori
+        int stok
+        int id_penerbit FK
+    }
+
+    TRANSAKSI_PEMINJAMAN {
+        int id_transaksi PK
+        varchar nim FK
+        int id_buku FK
+        date tanggal_pinjam
+        date tanggal_kembali
+        varchar status
+    }
+
+
+    PENERBIT ||--o{ BUKU : menerbitkan
+
+    MAHASISWA ||--o{ TRANSAKSI_PEMINJAMAN : melakukan
+
+    BUKU ||--o{ TRANSAKSI_PEMINJAMAN : dipinjam
+```
