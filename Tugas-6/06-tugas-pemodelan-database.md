@@ -121,46 +121,58 @@ Perbaikan:
 
 # Third Normal Form (3NF)
 
-Pada tahap ini dilakukan pemisahan atribut yang memiliki ketergantungan transitif.
+Pada tahap Third Normal Form dilakukan pemisahan atribut yang memiliki ketergantungan transitif.
 
-## Struktur Akhir
+Pada bentuk 2NF, data penerbit masih memiliki hubungan langsung dengan tabel buku sehingga perlu dibuat tabel penerbit tersendiri.
 
-Mahasiswa
+Pemisahan ini dilakukan agar setiap atribut non-primary key hanya bergantung pada primary key dalam tabelnya.
 
-- nim (PK)
+## Struktur Database Setelah 3NF
+
+### Tabel Mahasiswa
+
+Atribut:
+
+- nim (Primary Key)
 - nama_mahasiswa
 - program_studi
 - alamat
 - no_telepon
 
-Penerbit
+### Tabel Penerbit
 
-- id_penerbit (PK)
+Atribut:
+
+- id_penerbit (Primary Key)
 - nama_penerbit
 - alamat_penerbit
 - no_telepon
 
-Buku
+### Tabel Buku
 
-- id_buku (PK)
+Atribut:
+
+- id_buku (Primary Key)
 - judul_buku
 - tahun_terbit
 - kategori
 - stok
-- id_penerbit (FK)
+- id_penerbit (Foreign Key)
 
-Transaksi_Peminjaman
+### Tabel Transaksi_Peminjaman
 
-- id_transaksi (PK)
-- nim (FK)
-- id_buku (FK)
+Atribut:
+
+- id_transaksi (Primary Key)
+- nim (Foreign Key)
+- id_buku (Foreign Key)
 - tanggal_pinjam
 - tanggal_kembali
 - status
 
-# Rancangan Tabel Database
+# Rancangan Tabel Database Akhir
 
-## mahasiswa
+## Tabel mahasiswa
 
 | Field          | Tipe Data    | Key |
 | -------------- | ------------ | --- |
@@ -169,3 +181,34 @@ Transaksi_Peminjaman
 | program_studi  | VARCHAR(50)  |     |
 | alamat         | TEXT         |     |
 | no_telepon     | VARCHAR(15)  |     |
+
+## Tabel penerbit
+
+| Field           | Tipe Data    | Key |
+| --------------- | ------------ | --- |
+| id_penerbit     | INT          | PK  |
+| nama_penerbit   | VARCHAR(100) |     |
+| alamat_penerbit | TEXT         |     |
+| no_telepon      | VARCHAR(15)  |     |
+
+## Tabel buku
+
+| Field        | Tipe Data    | Key |
+| ------------ | ------------ | --- |
+| id_buku      | INT          | PK  |
+| judul_buku   | VARCHAR(150) |     |
+| tahun_terbit | YEAR         |     |
+| kategori     | VARCHAR(50)  |     |
+| stok         | INT          |     |
+| id_penerbit  | INT          | FK  |
+
+## Tabel transaksi_peminjaman
+
+| Field           | Tipe Data   | Key |
+| --------------- | ----------- | --- |
+| id_transaksi    | INT         | PK  |
+| nim             | VARCHAR(15) | FK  |
+| id_buku         | INT         | FK  |
+| tanggal_pinjam  | DATE        |     |
+| tanggal_kembali | DATE        |     |
+| status          | VARCHAR(20) |     |
