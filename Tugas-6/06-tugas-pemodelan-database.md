@@ -118,3 +118,54 @@ Perbaikan:
 | id_transaksi | nim   | id_buku |
 | ------------ | ----- | ------- |
 | T001         | 22001 | B001    |
+
+# Third Normal Form (3NF)
+
+Pada tahap ini dilakukan pemisahan atribut yang memiliki ketergantungan transitif.
+
+## Struktur Akhir
+
+Mahasiswa
+
+- nim (PK)
+- nama_mahasiswa
+- program_studi
+- alamat
+- no_telepon
+
+Penerbit
+
+- id_penerbit (PK)
+- nama_penerbit
+- alamat_penerbit
+- no_telepon
+
+Buku
+
+- id_buku (PK)
+- judul_buku
+- tahun_terbit
+- kategori
+- stok
+- id_penerbit (FK)
+
+Transaksi_Peminjaman
+
+- id_transaksi (PK)
+- nim (FK)
+- id_buku (FK)
+- tanggal_pinjam
+- tanggal_kembali
+- status
+
+# Rancangan Tabel Database
+
+## mahasiswa
+
+| Field          | Tipe Data    | Key |
+| -------------- | ------------ | --- |
+| nim            | VARCHAR(15)  | PK  |
+| nama_mahasiswa | VARCHAR(100) |     |
+| program_studi  | VARCHAR(50)  |     |
+| alamat         | TEXT         |     |
+| no_telepon     | VARCHAR(15)  |     |
