@@ -3,8 +3,6 @@
 session_start();
 
 
-// Membuat CSRF Token
-
 if(empty($_SESSION["csrf_token"])){
 
     $_SESSION["csrf_token"]
@@ -55,11 +53,6 @@ $error="";
 if($_SERVER["REQUEST_METHOD"]=="POST"){
 
 
-
-    // ==========================
-    // Validasi CSRF Token
-    // ==========================
-
     if(
         !isset($_POST["csrf_token"]) ||
         $_POST["csrf_token"] !== $_SESSION["csrf_token"]
@@ -83,12 +76,6 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     $pesan =
     trim($_POST["pesan"]);
 
-
-
-
-    // ==========================
-    // Validasi Input
-    // ==========================
 
     if(empty($nama)){
 
@@ -130,12 +117,8 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 }
 
 
-
-
 $data =
 $guestBook->getMessages();
-
-
 
 ?>
 
