@@ -2,7 +2,21 @@
 
 session_start();
 
+
+// Membuat CSRF Token
+
+if(empty($_SESSION["csrf_token"])){
+
+    $_SESSION["csrf_token"]
+    =
+    bin2hex(random_bytes(32));
+
+}
+
+
+
 require_once "classes/GuestBook.php";
+
 
 
 try {
@@ -29,6 +43,7 @@ catch(PDOException $e){
 }
 
 
+
 $guestBook = new GuestBook($pdo);
 
 
@@ -38,6 +53,23 @@ $error="";
 
 
 if($_SERVER["REQUEST_METHOD"]=="POST"){
+
+
+
+    // ==========================
+    // Validasi CSRF Token
+    // ==========================
+
+    if(
+        !isset($_POST["csrf_token"]) ||
+        $_POST["csrf_token"] !== $_SESSION["csrf_token"]
+    ){
+
+        die("CSRF Token tidak valid");
+
+    }
+
+
 
 
     $nama =
@@ -52,6 +84,11 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     trim($_POST["pesan"]);
 
 
+
+
+    // ==========================
+    // Validasi Input
+    // ==========================
 
     if(empty($nama)){
 
@@ -73,15 +110,18 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 
     else{
 
+
         $guestBook->addMessage(
             $nama,
             $email,
             $pesan
         );
 
+
         header(
             "Location: guestbook.php"
         );
+
 
         exit;
 
@@ -90,16 +130,66 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 }
 
 
+
+
 $data =
 $guestBook->getMessages();
 
 
+
 ?>
 
-<h2>Buku Tamu Perpustakaan</h2>
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<title>
+Buku Tamu Perpustakaan
+</title>
+
+</head>
+
+
+<body>
+
+
+
+<h2>
+Buku Tamu Perpustakaan
+</h2>
+
+
+
+
+<?php if($error): ?>
+
+<p>
+
+<?= htmlspecialchars($error); ?>
+
+</p>
+
+<?php endif; ?>
+
+
+
 
 
 <form method="POST">
+
+
+<!-- CSRF TOKEN -->
+
+<input 
+type="hidden"
+name="csrf_token"
+value="<?= $_SESSION["csrf_token"]; ?>"
+>
+
+
 
 
 <input 
@@ -108,7 +198,10 @@ name="nama"
 placeholder="Nama">
 
 
-<br>
+
+<br><br>
+
+
 
 
 <input 
@@ -117,7 +210,10 @@ name="email"
 placeholder="Email">
 
 
-<br>
+
+<br><br>
+
+
 
 
 <textarea 
@@ -126,12 +222,118 @@ placeholder="Pesan">
 </textarea>
 
 
-<br>
+
+<br><br>
 
 
-<button>
+
+
+<button type="submit">
+
 Kirim
+
 </button>
 
 
+
 </form>
+
+
+
+
+<hr>
+
+
+
+
+<h3>
+Daftar Pesan Pengunjung
+</h3>
+
+
+
+
+<table border="1" cellpadding="8">
+
+
+<tr>
+
+<th>
+Nama
+</th>
+
+
+<th>
+Email
+</th>
+
+
+<th>
+Pesan
+</th>
+
+
+<th>
+Tanggal Kirim
+</th>
+
+
+</tr>
+
+
+
+
+
+<?php foreach($data as $row): ?>
+
+
+<tr>
+
+
+<td>
+
+<?= htmlspecialchars($row["nama"]); ?>
+
+</td>
+
+
+
+<td>
+
+<?= htmlspecialchars($row["email"]); ?>
+
+</td>
+
+
+
+<td>
+
+<?= htmlspecialchars($row["pesan"]); ?>
+
+</td>
+
+
+
+<td>
+
+<?= htmlspecialchars($row["tanggal_kirim"]); ?>
+
+</td>
+
+
+
+</tr>
+
+
+
+<?php endforeach; ?>
+
+
+
+</table>
+
+
+
+</body>
+
+</html>
